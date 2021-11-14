@@ -61,7 +61,7 @@ class ComissionRestControllerTest {
     private PaymentDto getPaymentDto1() {
         PaymentDto paymentDto = new PaymentDto();
         paymentDto.setUserId(1L);
-        paymentDto.setValue(10000f);
+        paymentDto.setValue(10000d);
         paymentDto.setLocalDateTime(LocalDateTime.of(2021, 10, 21, 15, 10, 0));
         return paymentDto;
     }
@@ -69,7 +69,7 @@ class ComissionRestControllerTest {
     private PaymentDto getPaymentDto2() {
         PaymentDto paymentDto = new PaymentDto();
         paymentDto.setUserId(2L);
-        paymentDto.setValue(10000f);
+        paymentDto.setValue(10000d);
         paymentDto.setLocalDateTime(LocalDateTime.of(2021, 10, 21, 15, 10, 0));
         return paymentDto;
     }
@@ -77,7 +77,7 @@ class ComissionRestControllerTest {
     private PaymentDto getPaymentDto3() {
         PaymentDto paymentDto = new PaymentDto();
         paymentDto.setPhoneNumber("+79181234567");
-        paymentDto.setValue(1000f);
+        paymentDto.setValue(1000d);
         paymentDto.setLocalDateTime(LocalDateTime.of(2021, 10, 21, 15, 10, 0));
         return paymentDto;
     }

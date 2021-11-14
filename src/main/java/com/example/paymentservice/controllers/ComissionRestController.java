@@ -20,7 +20,7 @@ public class ComissionRestController {
 
     @GetMapping
     public ResponseEntity<Object> getComission(@RequestBody PaymentDto paymentDto){
-        float comission = comissionService.getComissionPercent(paymentDto);
+        double comission = comissionService.getComissionPercent(paymentDto);
         return new ResponseEntity<>(comission, HttpStatus.OK);
     }
 
@@ -29,7 +29,7 @@ public class ComissionRestController {
         PaymentDto paymentDto = new PaymentDto();
         paymentDto.setUserId(1L);
         paymentDto.setLocalDateTime(LocalDateTime.now());
-        paymentDto.setValue(10000f);
+        paymentDto.setValue(10000d);
         return new ResponseEntity<>(paymentDto,HttpStatus.OK);
     }
 }

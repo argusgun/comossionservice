@@ -16,6 +16,6 @@ public class PaymentEntity {
     @JoinColumn(name = "user_id",nullable = false)
     private UserEntity user;
     private LocalDateTime paymentTime;
-    private Float value;
+    private Double value;
     private String description;
 }

@@ -17,9 +17,8 @@ public class ComissionService {
     private final UserRepo userRepo;
     private final PaymentRepo paymentRepo;
 
-    public float getComissionPercent(PaymentDto paymentDto) {
+    public double getComissionPercent(PaymentDto paymentDto) {
         int comission = 1;
-        final Float[] sum = {0f};
         UserEntity userEntity;
         if (paymentDto.getUserId() != null) {
             userEntity = userRepo.getById(paymentDto.getUserId());
@@ -27,13 +26,11 @@ public class ComissionService {
             userEntity = userRepo.findUserEntityByPhoneNumber(paymentDto.getPhoneNumber());
         }
         List<PaymentEntity> paymentEntities = paymentRepo.findAllByUserAndPaymentTimeAfter(userEntity, LocalDateTime.of(paymentDto.getLocalDateTime().getYear(), paymentDto.getLocalDateTime().getMonth(), 1, 0, 0));
-                paymentEntities.stream().forEach(p -> {
-            sum[0] = sum[0] + p.getValue();
-        });
-        sum[0]=sum[0] + paymentDto.getValue();
-        if (sum[0].compareTo(100000f) > 0) {
+        double sum1 = paymentEntities.stream().mapToDouble(PaymentEntity::getValue).sum();
+        Double sum=sum1 + paymentDto.getValue();
+        if (sum >= 100000) {
             comission = 5;
-        } else if (sum[0].compareTo(10000f) > 0) {
+        } else if (sum>=10000) {
             comission = 3;
         }
         return comission*paymentDto.getValue()/100;

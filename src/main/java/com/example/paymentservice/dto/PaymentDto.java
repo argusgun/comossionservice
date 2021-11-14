@@ -13,7 +13,7 @@ public class PaymentDto {
     private Long userId;
     private String phoneNumber;
     private LocalDateTime localDateTime;
-    private Float value;
+    private Double value;
 
     public PaymentDto fromEntity(PaymentEntity paymentEntity){
         PaymentDto paymentDto = new PaymentDto();

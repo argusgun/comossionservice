@@ -33,7 +33,7 @@ class ComissionServiceTest {
         UserEntity userEntity=getUserEntity();
         Mockito.doReturn(userEntity).when(userRepo).getById(paymentDto1.getUserId());
         Mockito.doReturn(paymentEntities).when(paymentRepo).findAllByUserAndPaymentTimeAfter(userEntity,LocalDateTime.of(paymentDto1.getLocalDateTime().getYear(),paymentDto1.getLocalDateTime().getMonth(),1,0,0));
-        Float comission = comissionService.getComissionPercent(paymentDto1);
+        Double comission = comissionService.getComissionPercent(paymentDto1);
         Mockito.verify(userRepo,Mockito.times(1)).getById(paymentDto1.getUserId());
         Mockito.verify(userRepo,Mockito.times(0)).findUserEntityByPhoneNumber(paymentDto1.getPhoneNumber());
         Assert.assertEquals(new Float(500),comission);
@@ -48,10 +48,10 @@ class ComissionServiceTest {
         UserEntity userEntity=getUserEntity();
         Mockito.doReturn(userEntity).when(userRepo).findUserEntityByPhoneNumber(paymentDto2.getPhoneNumber());
         Mockito.doReturn(paymentEntities).when(paymentRepo).findAllByUserAndPaymentTimeAfter(userEntity,LocalDateTime.of(paymentDto2.getLocalDateTime().getYear(),paymentDto2.getLocalDateTime().getMonth(),1,0,0));
-        Float comission = comissionService.getComissionPercent(paymentDto2);
+        double comission = comissionService.getComissionPercent(paymentDto2);
         Mockito.verify(userRepo,Mockito.times(0)).getById(paymentDto2.getUserId());
         Mockito.verify(userRepo,Mockito.times(1)).findUserEntityByPhoneNumber(paymentDto2.getPhoneNumber());
-        Assert.assertEquals(new Float(30),comission);
+        Assert.assertEquals(30,comission);
 
 
     }
@@ -59,7 +59,7 @@ class ComissionServiceTest {
     private PaymentDto getPaymentDto1() {
         PaymentDto paymentDto = new PaymentDto();
         paymentDto.setUserId(1L);
-        paymentDto.setValue(10000f);
+        paymentDto.setValue(10000d);
         paymentDto.setLocalDateTime(LocalDateTime.of(2021, 10, 21, 15, 10, 0));
         return paymentDto;
     }
@@ -67,7 +67,7 @@ class ComissionServiceTest {
     private PaymentDto getPaymentDto2() {
         PaymentDto paymentDto = new PaymentDto();
         paymentDto.setPhoneNumber("+79181234567");
-        paymentDto.setValue(1000f);
+        paymentDto.setValue(1000d);
         paymentDto.setLocalDateTime(LocalDateTime.of(2021, 10, 21, 15, 10, 0));
         return paymentDto;
     }
@@ -76,7 +76,7 @@ class ComissionServiceTest {
         PaymentEntity paymentEntity = new PaymentEntity();
         paymentEntity.setId(2L);
         paymentEntity.setPaymentTime(LocalDateTime.of(2021,10,10,10,10,10));
-        paymentEntity.setValue(10000f);
+        paymentEntity.setValue(10000d);
         return paymentEntity;
     }
 
@@ -84,7 +84,7 @@ class ComissionServiceTest {
         PaymentEntity paymentEntity = new PaymentEntity();
         paymentEntity.setId(3L);
         paymentEntity.setPaymentTime(LocalDateTime.of(2021,10,10,10,10,10));
-        paymentEntity.setValue(91000f);
+        paymentEntity.setValue(91000d);
         return paymentEntity;
     }
 
@@ -92,7 +92,7 @@ class ComissionServiceTest {
         PaymentEntity paymentEntity = new PaymentEntity();
         paymentEntity.setId(3L);
         paymentEntity.setPaymentTime(LocalDateTime.of(2021,9,28,10,10,10));
-        paymentEntity.setValue(91000f);
+        paymentEntity.setValue(91000d);
         return paymentEntity;
     }
 
